@@ -11,13 +11,16 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 class hashExample{
 	static int iterationCount = 0;
+	static String password;
   public static void main(String[] args){
 	  
-	if(args.length > 0){
-     iterationCount = iterationCount + Integer.parseInt(args[0]);
+	if(args.length > 0 && args[0] != null){
+     password = args[0];		
+     iterationCount = iterationCount + Integer.parseInt(args[1]);
 	}else{
 		iterationCount += 80000;
 	}
+	System.out.println(password + " " + iterationCount);
   /*I am using a SecureRandom class from java.security
   to generate a secure random number
   */ 
@@ -45,15 +48,12 @@ class hashExample{
    */
     byte[] hash = tehdas.generateSecret(spec).getEncoded();
     System.out.println(hash);
-	//Prints B@7de26db8 which is the hash for password "salasana" + salt
+	//Prints B@5e265ba4 with parameters "salasana" and 80000 and it is the hash for password "salasana" + salt
   } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
     
     System.out.println(e.getMessage());
   }
-  
  
 
 }
-
-  
   }
